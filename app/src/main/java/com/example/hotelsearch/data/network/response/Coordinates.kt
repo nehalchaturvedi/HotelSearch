@@ -1,4 +1,4 @@
-package com.example.hotelsearch.network.response
+package com.example.hotelsearch.data.network.response
 
 
 import com.google.gson.annotations.SerializedName

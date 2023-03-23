@@ -1,6 +1,6 @@
-package com.example.hotelsearch.network
+package com.example.hotelsearch.data.network
 
-import com.example.hotelsearch.network.response.HotelListResponse
+import com.example.hotelsearch.data.network.response.HotelListResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor

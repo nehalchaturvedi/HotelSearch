@@ -1,10 +1,10 @@
-package com.example.hotelsearch.network
+package com.example.hotelsearch.data.network
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.hotelsearch.internal.exceptions.NoConnectivityException
-import com.example.hotelsearch.network.response.HotelListResponse
+import com.example.hotelsearch.data.network.response.HotelListResponse
 
 class HotelsNetworkDataSourceImpl(
     private val apiService: ApiService
