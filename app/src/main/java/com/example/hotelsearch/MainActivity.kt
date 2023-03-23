@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import com.example.hotelsearch.data.network.ApiService
-import com.example.hotelsearch.data.network.ConnectivityInterceptorImpl
+import com.example.hotelsearch.data.network.interceptors.ConnectivityInterceptorImpl
 import com.example.hotelsearch.data.network.HotelsNetworkDataSourceImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

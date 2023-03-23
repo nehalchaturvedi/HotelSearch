@@ -1,5 +1,6 @@
 package com.example.hotelsearch.data.network
 
+import com.example.hotelsearch.data.network.interceptors.ConnectivityInterceptor
 import com.example.hotelsearch.data.network.response.HotelListResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred

@@ -1,4 +1,4 @@
-package com.example.hotelsearch.data.network
+package com.example.hotelsearch.data.network.interceptors
 
 import okhttp3.Interceptor
 
