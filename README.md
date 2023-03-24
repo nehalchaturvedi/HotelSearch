@@ -1,4 +1,4 @@
-<h1>Android Hotel Application</h1>
+<h1>Android Hotel Search Application</h1>
 <p>This Android application communicates with Hotels.com API to display a list of hotels based on user input and a detailed view of a selected hotel. The application is built using Kotlin, with MVVM architectural pattern design, Kodein for dependency injection, and Coroutines for asynchronous calls, making it efficient.</p>
 <h2>MVVM Architecture Pattern</h2>
 <p>MVVM stands for Model-View-ViewModel. It is an architectural pattern that separates the presentation layer from the business logic layer, which makes the application easier to maintain and test. The three main components of the MVVM architecture are:</p>
@@ -18,6 +18,8 @@
 <h2>Conclusion</h2>
 <p>Overall, this Android application is built using the best practices and the latest technologies, making it efficient, maintainable, and scalable. The MVVM architecture pattern, Kodein dependency injection, central repository, efficient Coroutines, and ViewBinding/DataBinding are some of the key features that make this application stand out.</p>
 
+![Screenshot1](https://github.com/nehalchaturvedi/HotelSearch/blob/master/ss1.png?raw=true)
+![Screenshot1](https://github.com/nehalchaturvedi/HotelSearch/blob/master/ss2.png?raw=true)
 
 
 
