@@ -17,6 +17,7 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
+//Dependency Injection using Kodein
 class HotelSearchApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@HotelSearchApplication))

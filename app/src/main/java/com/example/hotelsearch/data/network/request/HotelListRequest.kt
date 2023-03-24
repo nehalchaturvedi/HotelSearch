@@ -4,6 +4,7 @@ package com.example.hotelsearch.data.network.request
 import com.google.gson.annotations.SerializedName
 import java.lang.reflect.Constructor
 
+//Request used to send POST API request
 data class HotelListRequest(
     val checkInDate: CheckInDate,
     val checkOutDate: CheckOutDate,

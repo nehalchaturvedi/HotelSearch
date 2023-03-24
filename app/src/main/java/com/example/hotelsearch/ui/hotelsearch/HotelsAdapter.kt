@@ -10,6 +10,7 @@ import com.example.hotelsearch.R
 import com.example.hotelsearch.data.network.response.detail.Property
 import com.squareup.picasso.Picasso
 
+//Simple Custom Adapter to display each card of hotel efficiently
 class HotelsAdapter(private val onClickListener: OnClickListener) :
     RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
 

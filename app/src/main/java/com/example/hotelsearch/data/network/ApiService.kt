@@ -1,6 +1,5 @@
 package com.example.hotelsearch.data.network
 
-import android.location.LocationRequest
 import com.example.hotelsearch.data.network.interceptors.ConnectivityInterceptor
 import com.example.hotelsearch.data.network.request.HotelListRequest
 import com.example.hotelsearch.data.network.response.detail.HotelDetailsResponse
@@ -16,8 +15,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-const val API_KEY = "9eda302602msh58bd8e7d28516aap15a3b6jsnbc8940bfbfc1"
-const val API_HOST = "hotels4.p.rapidapi.com"
+//API service that handles REST communication
+const val API_KEY = "eb07c2ad91msh79b8bfcf83611f4p13a2f5jsn39e78106a121"
+const val API_HOST = "hotels4.p.rapidapi.com "
 const val BASE_URL = "https://hotels4.p.rapidapi.com/"
 
 //"https://hotels4.p.rapidapi.com/locations/v3/search?q=new%20york&locale=en_US&langid=1033&siteid=300000001

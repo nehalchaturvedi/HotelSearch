@@ -57,12 +57,13 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         }
         binding.etSearch.setOnEditorActionListener { textView, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+                //First API called to get locationID from the search prompt
                 getHotelLocation()
             }
             return@setOnEditorActionListener true
         }
 
-        //Hotel details fetched once locationId is updated.
+        //Hotel list details fetched once locationId is updated.
         locationId.observe(this, Observer {
             fetchHotelDetails()
         })
@@ -98,6 +99,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         }
 
         val hotelDetails = viewModel.getHotelDetails(locationId.value!!)
+        //List of hotels extracted, and handed to custom adapter to display.
         hotelDetails.await().observe(this@HotelSearchActivity, Observer {
             binding.progressBar.visibility = View.GONE
             if (it == null) return@Observer
@@ -107,6 +109,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         })
     }
 
+    //Extract location ID from response of list
     private fun getLocationId(response: HotelSearchResponse): String {
         try {
             for (h in response.hotelList) {

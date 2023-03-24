@@ -1,7 +1,6 @@
 package com.example.hotelsearch.ui.hoteldetails
 
 import android.R
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,6 +9,7 @@ import com.example.hotelsearch.databinding.ActivityHotelDetailsBinding
 import com.squareup.picasso.Picasso
 
 
+//Shows detailed views of hotels selected from recycler view
 class HotelDetailsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHotelDetailsBinding
@@ -18,6 +18,7 @@ class HotelDetailsActivity : AppCompatActivity() {
         binding = ActivityHotelDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //DataBinding used to display Hotel information.
         val hotel = DataBindingExample(
             intent.getStringExtra("name") ?: "",
             intent.getDoubleExtra("score", 0.0),
