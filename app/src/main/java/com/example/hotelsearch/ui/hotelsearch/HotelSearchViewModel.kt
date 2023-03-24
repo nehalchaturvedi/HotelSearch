@@ -10,7 +10,7 @@ class HotelSearchViewModel(
 
 
     val hotellist by lazyDeferred {
-        hotelsRepository.getHotels("")
+        hotelsRepository.getHotels("new york")
     }
 
 

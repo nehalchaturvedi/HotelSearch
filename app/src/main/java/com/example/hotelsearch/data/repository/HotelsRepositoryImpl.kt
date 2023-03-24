@@ -10,12 +10,6 @@ class HotelsRepositoryImpl(
     private val hotelsNetworkDataSource: HotelsNetworkDataSource
 ) : HotelsRepository {
 
-    init {
-        hotelsNetworkDataSource.downloadedHotelsList.observeForever { newHotelList ->
-            //persist
-        }
-    }
-
     override suspend fun getHotels(location: String): LiveData<HotelListResponse> {
         return withContext(Dispatchers.IO) {
             hotelsNetworkDataSource.fetchHotels(location)
