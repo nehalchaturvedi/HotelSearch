@@ -9,6 +9,7 @@ import com.example.hotelsearch.R
 import com.example.hotelsearch.data.network.ApiService
 import com.example.hotelsearch.data.network.interceptors.ConnectivityInterceptorImpl
 import com.example.hotelsearch.data.network.HotelsNetworkDataSourceImpl
+import com.example.hotelsearch.databinding.ActivityMainBinding
 import com.example.hotelsearch.ui.base.ScopedActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -23,22 +24,15 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: HotelSearchViewModelFactory by instance()
     private lateinit var viewModel: HotelSearchViewModel
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(HotelSearchViewModel::class.java)
         bindUI()
-//        val apisrevice = ApiService(ConnectivityInterceptorImpl(this.applicationContext))
-//        val hotelsNetworkDataSourceImpl = HotelsNetworkDataSourceImpl(apisrevice)
-//
-//        hotelsNetworkDataSourceImpl.downloadedHotelsList.observe(this, Observer {
-//            Log.d("response", it.toString())
-//        })
-//
-//        GlobalScope.launch(Dispatchers.Main) {
-//            hotelsNetworkDataSourceImpl.fetchHotels("New york")
-//        }
     }
 
     private fun bindUI() = launch {
@@ -46,6 +40,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         hotels.await().observe(this@HotelSearchActivity, Observer {
             if (it == null) return@Observer
             Log.d("response", it.toString())
+            binding.tvText.text = it.toString()
         })
 
     }
