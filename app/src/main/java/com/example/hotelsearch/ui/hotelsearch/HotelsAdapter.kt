@@ -10,7 +10,8 @@ import com.example.hotelsearch.R
 import com.example.hotelsearch.data.network.response.detail.Property
 import com.squareup.picasso.Picasso
 
-class HotelsAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
+class HotelsAdapter(private val onClickListener: OnClickListener) :
+    RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
 
     var hotels = listOf<Property>()
 
@@ -40,10 +41,10 @@ class HotelsAdapter(private val onClickListener: OnClickListener) : RecyclerView
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel = hotels[position]
-        holder.tvTitle.text = hotel.name
-        holder.tvContent.text = hotel?.offerBadge?.primary?.text ?: ""
-        holder.tvContent2.text = "${hotel.reviews.score} / 10"
-        if (holder.tvContent.text.isEmpty())
+        holder.tvTitle.text = hotel.name ?: ""
+        holder.tvContent2.text = hotel?.offerBadge?.primary?.text ?: ""
+        holder.tvContent.text = "${hotel.reviews.score} / 10"
+        if (holder.tvContent2.text.isEmpty())
             holder.ivOffer.visibility = View.GONE
         else
             holder.ivOffer.visibility = View.VISIBLE

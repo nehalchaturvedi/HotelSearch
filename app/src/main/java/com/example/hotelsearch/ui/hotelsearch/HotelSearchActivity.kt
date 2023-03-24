@@ -38,10 +38,11 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     private fun attachListeners() {
         adapter = HotelsAdapter(HotelsAdapter.OnClickListener { hotel ->
             var intent = Intent(this, HotelDetailsActivity::class.java)
-            intent.putExtra("name", hotel.name)
-            intent.putExtra("score", hotel.reviews.score)
+            intent.putExtra("name", hotel.name ?: "")
+            intent.putExtra("score", hotel.reviews.score ?: 0)
             intent.putExtra("price", hotel.price?.options?.get(0)?.formattedDisplayPrice)
             intent.putExtra("offer", hotel?.offerBadge?.primary?.text)
+            intent.putExtra("image", hotel.propertyImage.image.url ?: "")
             startActivity(intent)
         })
         binding.mRecyclerView.adapter = adapter
