@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import org.kodein.di.KodeinAware
 import kotlin.coroutines.CoroutineContext
 
 abstract class ScopedActivity : AppCompatActivity(), CoroutineScope {

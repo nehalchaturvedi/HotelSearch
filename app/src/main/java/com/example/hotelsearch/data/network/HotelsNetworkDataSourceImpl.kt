@@ -21,9 +21,7 @@ class HotelsNetworkDataSourceImpl(
                 .await()
 
             _downloadedHotelsList.postValue(fetchedHotels)
-        }
-        catch (e : NoConnectivityException)
-        {
+        } catch (e: NoConnectivityException) {
             Log.e("No Internet", e.message.toString())
         }
     }

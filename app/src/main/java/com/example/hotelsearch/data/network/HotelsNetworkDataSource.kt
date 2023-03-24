@@ -5,9 +5,9 @@ import com.example.hotelsearch.data.network.response.HotelListResponse
 
 interface HotelsNetworkDataSource {
 
-    val downloadedHotelsList : LiveData<HotelListResponse>
+    val downloadedHotelsList: LiveData<HotelListResponse>
 
     suspend fun fetchHotels(
-        location : String
+        location: String
     )
 }

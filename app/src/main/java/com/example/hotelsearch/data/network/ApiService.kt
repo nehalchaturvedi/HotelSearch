@@ -27,7 +27,7 @@ interface ApiService {
 
     companion object {
         operator fun invoke(
-            connectivityInterceptor : ConnectivityInterceptor
+            connectivityInterceptor: ConnectivityInterceptor
         ): ApiService {
             val requestInterceptor = Interceptor { chain ->
                 val request = chain.request()
