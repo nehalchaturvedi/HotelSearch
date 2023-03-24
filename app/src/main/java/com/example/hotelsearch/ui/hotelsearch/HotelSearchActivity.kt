@@ -32,10 +32,11 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HotelSearchViewModel::class.java)
-        attachListeners()
+        bindUI()
     }
 
-    private fun attachListeners() {
+    private fun bindUI() {
+        //Setup adapter
         adapter = HotelsAdapter(HotelsAdapter.OnClickListener { hotel ->
             var intent = Intent(this, HotelDetailsActivity::class.java)
             intent.putExtra("name", hotel.name ?: "")
@@ -48,14 +49,17 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         binding.mRecyclerView.adapter = adapter
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
 
+        //Setup on click listener for search
         binding.ivSearch.setOnClickListener {
             val searchText = binding.etSearch.text.toString()
             if (searchText.isEmpty()) {
-                Toast.makeText(this, "Please enter a valid location", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Please enter a valid location", Toast.LENGTH_LONG).show()
             } else {
                 fetchHotelLocation(searchText)
             }
         }
+
+        //Hotel details fetched once locationId is updated.
         locationId.observe(this, Observer {
             fetchHotelDetails()
         })
@@ -66,18 +70,20 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         val hotels = viewModel.getList(searchText)
         hotels.await().observe(this@HotelSearchActivity, Observer {
             if (it == null) return@Observer
+            //locationID updated here, which triggers fetchHotelDetails()
             locationId.postValue(getLocationId(it))
         })
     }
 
     private fun fetchHotelDetails() = launch {
+        Log.d("id", locationId.value.toString())
         val hotelDetails = viewModel.getHotelDetails(locationId.value!!)
         hotelDetails.await().observe(this@HotelSearchActivity, Observer {
             binding.progressBar.visibility = View.GONE
             if (it == null) return@Observer
-            //Log.d("response", it.toString())
             val response = it
             adapter.hotels = response.data.propertySearch.properties
+            adapter.notifyDataSetChanged()
             Log.d("response", response.toString())
         })
     }
@@ -85,12 +91,12 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     private fun getLocationId(response: HotelSearchResponse): String {
         try {
             for (h in response.hotelList) {
-                if (h.type.equals("CITY")) {
+                if (h.type == "gaiaRegionResult") {
                     return h.gaiaId
                 }
             }
         } catch (e: java.lang.Exception) {
-            Log.e("error", "city not found")
+            Log.d("error", "city not found")
         }
         return "2622"
     }
