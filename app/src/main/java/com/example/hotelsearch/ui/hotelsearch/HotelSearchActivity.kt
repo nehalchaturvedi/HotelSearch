@@ -1,5 +1,6 @@
 package com.example.hotelsearch.ui.hotelsearch
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hotelsearch.data.network.response.search.HotelSearchResponse
 import com.example.hotelsearch.databinding.ActivityMainBinding
 import com.example.hotelsearch.ui.base.ScopedActivity
+import com.example.hotelsearch.ui.hoteldetails.HotelDetailsActivity
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -23,7 +25,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     private lateinit var viewModel: HotelSearchViewModel
     lateinit var binding: ActivityMainBinding
     var locationId = MutableLiveData<String>()
-    var adapter = HotelsAdapter()
+    lateinit var adapter: HotelsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,10 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     }
 
     private fun attachListeners() {
+        adapter = HotelsAdapter(HotelsAdapter.OnClickListener { hotel ->
+            var intent = Intent(this, HotelDetailsActivity::class.java)
+            startActivity(intent)
+        })
         binding.mRecyclerView.adapter = adapter
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -66,7 +72,6 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
             if (it == null) return@Observer
             //Log.d("response", it.toString())
             val response = it
-            adapter.hotels
             adapter.hotels = response.data.propertySearch.properties
             Log.d("response", response.toString())
         })

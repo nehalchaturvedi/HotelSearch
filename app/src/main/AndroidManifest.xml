@@ -16,7 +16,7 @@
         android:theme="@style/Theme.HotelSearch"
         tools:targetApi="31">
         <activity
-            android:name=".HotelDetailsActivity"
+            android:name=".ui.hoteldetails.HotelDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.hotelsearch.HotelSearchActivity"
