@@ -2,6 +2,7 @@ package com.example.hotelsearch.ui.hotelsearch
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.hotelsearch.databinding.ActivityMainBinding
@@ -30,6 +31,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     private fun bindUI() = launch {
         val hotels = viewModel.hotellist
         hotels.await().observe(this@HotelSearchActivity, Observer {
+            binding.progressBar.visibility = View.GONE
             if (it == null) return@Observer
             Log.d("response", it.toString())
             binding.tvText.text = it.toString()

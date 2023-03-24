@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HotelSearch</string>
+    <string name="enter_destination">Enter Destination</string>
 </resources>
