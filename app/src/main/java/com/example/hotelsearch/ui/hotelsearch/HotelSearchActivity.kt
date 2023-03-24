@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -52,18 +53,28 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
 
         //Setup on click listener for search
         binding.ivSearch.setOnClickListener {
-            val searchText = binding.etSearch.text.toString()
-            if (searchText.isEmpty()) {
-                Toast.makeText(this, "Please enter a valid location", Toast.LENGTH_LONG).show()
-            } else {
-                fetchHotelLocation(searchText)
+            getHotelLocation()
+        }
+        binding.etSearch.setOnEditorActionListener { textView, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                getHotelLocation()
             }
+            return@setOnEditorActionListener true
         }
 
         //Hotel details fetched once locationId is updated.
         locationId.observe(this, Observer {
             fetchHotelDetails()
         })
+    }
+
+    fun getHotelLocation() {
+        val searchText = binding.etSearch.text.toString()
+        if (searchText.isEmpty()) {
+            Toast.makeText(this, "Please enter a valid location", Toast.LENGTH_LONG).show()
+        } else {
+            fetchHotelLocation(searchText)
+        }
     }
 
     private fun fetchHotelLocation(searchText: String) = launch {
@@ -82,6 +93,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
             adapter.hotels = listOf<Property>()
             adapter.notifyDataSetChanged()
             binding.progressBar.visibility = View.GONE
+            binding.tvCityName.text = ""
             return@launch
         }
 
