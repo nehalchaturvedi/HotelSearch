@@ -1,7 +1,7 @@
 package com.example.hotelsearch.data.network
 
 import com.example.hotelsearch.data.network.interceptors.ConnectivityInterceptor
-import com.example.hotelsearch.data.network.response.HotelListResponse
+import com.example.hotelsearch.data.network.response.search.HotelListResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -24,6 +24,8 @@ interface ApiService {
         @Query("q") location: String,
         @Query("locale") locale: String = "en_US"
     ): Deferred<HotelListResponse>
+
+
 
     companion object {
         operator fun invoke(

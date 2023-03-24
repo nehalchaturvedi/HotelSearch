@@ -1,7 +1,7 @@
 package com.example.hotelsearch.data.network
 
 import androidx.lifecycle.LiveData
-import com.example.hotelsearch.data.network.response.HotelListResponse
+import com.example.hotelsearch.data.network.response.search.HotelListResponse
 
 interface HotelsNetworkDataSource {
 
