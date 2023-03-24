@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class PropertyImageX(
     val alt: String,
     val fallbackImage: Any,
-    val image: ImageX,
+    val image: Image,
     val subjectId: Int,
     @SerializedName("__typename")
     val typename: String

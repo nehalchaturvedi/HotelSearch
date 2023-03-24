@@ -8,7 +8,7 @@ data class RevealAction(
     val action: Action,
     val badge: Int,
     val disabled: Boolean,
-    val icon: IconXX,
+    val icon: Icon,
     val primary: String,
     @SerializedName("__typename")
     val typename: String

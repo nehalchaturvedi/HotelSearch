@@ -2,6 +2,7 @@ package com.example.hotelsearch.data.network.request
 
 
 import com.google.gson.annotations.SerializedName
+import java.lang.reflect.Constructor
 
 data class HotelListRequest(
     val checkInDate: CheckInDate,
@@ -9,7 +10,7 @@ data class HotelListRequest(
     val currency: String,
     val destination: Destination,
     val eapid: Int,
-    val filters: Filters,
+    //val filters: Filters,
     val locale: String,
     val resultsSize: Int,
     val resultsStartingIndex: Int,

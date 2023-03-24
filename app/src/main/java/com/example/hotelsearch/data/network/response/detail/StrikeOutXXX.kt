@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class StrikeOutXXX(
     val amount: Double,
-    val currencyInfo: CurrencyInfoXXX,
+    val currencyInfo: CurrencyInfo,
     val formatted: String,
     @SerializedName("__typename")
     val typename: String

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class FilterMetadata(
     val amenities: List<Amenity>,
     val neighborhoods: List<Neighborhood>,
-    val priceRange: PriceRange,
+    //val priceRange: PriceRange,
     @SerializedName("__typename")
     val typename: String
 )

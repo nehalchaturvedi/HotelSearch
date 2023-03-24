@@ -3,6 +3,7 @@ package com.example.hotelsearch.ui.hotelsearch
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.hotelsearch.databinding.ActivityMainBinding
@@ -18,6 +19,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     private val viewModelFactory: HotelSearchViewModelFactory by instance()
     private lateinit var viewModel: HotelSearchViewModel
     lateinit var binding: ActivityMainBinding
+    var locationId = MutableLiveData<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +37,16 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
             if (it == null) return@Observer
             Log.d("response", it.toString())
             binding.tvText.text = it.toString()
-
+            locationId.postValue("2621")
             //make second call
         })
+
+        val hotelDetails = viewModel.hoteldetails
+        hotelDetails.await().observe(this@HotelSearchActivity, Observer {
+            if (it == null) return@Observer
+            Log.d("response", it.toString())
+        })
+
 
     }
 }

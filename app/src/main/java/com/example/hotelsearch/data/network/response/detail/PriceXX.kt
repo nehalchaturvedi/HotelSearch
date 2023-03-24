@@ -7,7 +7,7 @@ data class PriceXX(
     val displayMessages: List<DisplayMessageX>,
     val lead: LeadX,
     val options: List<OptionX>,
-    val priceMessages: List<PriceMessageX>,
+    val priceMessages: List<PriceMessage>,
     val priceMessaging: Any,
     val strikeOut: StrikeOutXXX,
     val strikeOutType: String,

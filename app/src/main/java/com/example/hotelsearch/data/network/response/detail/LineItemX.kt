@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 data class LineItemX(
     val accessibilityLabel: Any,
     val badge: Any,
-    val disclaimer: DisclaimerXX,
+    val disclaimer: Disclaimer,
     val mark: Any,
-    val price: PriceXXX,
+    val price: Price,
     val role: String,
     val state: Any,
     @SerializedName("__typename")
