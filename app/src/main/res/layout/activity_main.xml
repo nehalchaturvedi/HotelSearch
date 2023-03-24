@@ -30,11 +30,23 @@
             android:background="@drawable/baseline_search_24" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tvCityName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlTop"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="12sp"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rlTop" />
+        android:layout_below="@id/tvCityName" />
 
     <ProgressBar
         android:id="@+id/progressBar"

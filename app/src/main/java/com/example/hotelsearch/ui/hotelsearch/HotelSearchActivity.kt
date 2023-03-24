@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hotelsearch.data.network.response.detail.Property
 import com.example.hotelsearch.data.network.response.search.HotelSearchResponse
 import com.example.hotelsearch.databinding.ActivityMainBinding
 import com.example.hotelsearch.ui.base.ScopedActivity
@@ -76,7 +77,14 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     }
 
     private fun fetchHotelDetails() = launch {
-        Log.d("id", locationId.value.toString())
+        if (locationId.value.isNullOrBlank()) {
+            Toast.makeText(this@HotelSearchActivity, "City Not found", Toast.LENGTH_LONG).show()
+            adapter.hotels = listOf<Property>()
+            adapter.notifyDataSetChanged()
+            binding.progressBar.visibility = View.GONE
+            return@launch
+        }
+
         val hotelDetails = viewModel.getHotelDetails(locationId.value!!)
         hotelDetails.await().observe(this@HotelSearchActivity, Observer {
             binding.progressBar.visibility = View.GONE
@@ -84,7 +92,6 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
             val response = it
             adapter.hotels = response.data.propertySearch.properties
             adapter.notifyDataSetChanged()
-            Log.d("response", response.toString())
         })
     }
 
@@ -92,12 +99,17 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         try {
             for (h in response.hotelList) {
                 if (h.type == "gaiaRegionResult") {
+                    binding.tvCityName.text =
+                        String.format(
+                            "Showing results around - %s",
+                            h.regionNames.displayName ?: ""
+                        )
                     return h.gaiaId
                 }
             }
         } catch (e: java.lang.Exception) {
-            Log.d("error", "city not found")
+            Log.e("NoCityFoundException", e.printStackTrace().toString())
         }
-        return "2622"
+        return ""
     }
 }
