@@ -2,6 +2,7 @@ package com.example.hotelsearch.data.network
 
 import android.location.LocationRequest
 import com.example.hotelsearch.data.network.interceptors.ConnectivityInterceptor
+import com.example.hotelsearch.data.network.request.HotelListRequest
 import com.example.hotelsearch.data.network.response.detail.HotelDetailsResponse
 import com.example.hotelsearch.data.network.response.search.HotelSearchResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -30,7 +31,7 @@ interface ApiService {
     ): Deferred<HotelSearchResponse>
 
     @POST("properties/v2/list")
-    fun getHotels(@Body request: LocationRequest): Deferred<HotelDetailsResponse>
+    fun getHotels(@Body request: HotelListRequest): Deferred<HotelDetailsResponse>
 
 
     companion object {
