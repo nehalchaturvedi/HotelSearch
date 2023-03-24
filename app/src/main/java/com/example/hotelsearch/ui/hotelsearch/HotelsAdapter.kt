@@ -15,13 +15,13 @@ class HotelsAdapter : RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
     var hotels = listOf<Property>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var imgView: ImageView
+        var ivImage: ImageView
         var tvTitle: TextView
         var tvContent: TextView
         var tvContent2: TextView
 
         init {
-            imgView = view.findViewById(R.id.mImageViewCardViewItem)
+            ivImage = view.findViewById(R.id.mImageViewCardViewItem)
             tvTitle = view.findViewById(R.id.tvTitle)
             tvContent = view.findViewById(R.id.tvContent)
             tvContent2 = view.findViewById(R.id.tvContent2)
@@ -39,8 +39,8 @@ class HotelsAdapter : RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel = hotels[position]
         holder.tvTitle.text = hotel.name
-        holder.tvContent.text = hotel.price.toString()
-        holder.tvContent2.text = hotel.reviews.toString()
-        Picasso.get().load(hotel.propertyImage.image.url).into(holder.imgView)
+        holder.tvContent.text = hotel?.offerBadge?.primary?.text ?: ""
+        holder.tvContent.text = hotel?.offerBadge?.secondary?.text ?: ""
+        Picasso.get().load(hotel.propertyImage.image.url).into(holder.ivImage)
     }
 }

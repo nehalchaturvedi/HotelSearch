@@ -28,8 +28,10 @@
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
+            android:textSize="24sp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:singleLine="true"
             android:layout_toEndOf="@+id/mImageViewCardViewItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/mImageViewCardViewItem"
@@ -47,6 +49,7 @@
             android:layout_marginBottom="16dp"
             android:layout_toEndOf="@+id/mImageViewCardViewItem"
             app:layout_constraintEnd_toEndOf="parent"
+            android:singleLine="true"
             app:layout_constraintStart_toEndOf="@+id/mImageViewCardViewItem"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             tools:text="@tools:sample/lorem" />
