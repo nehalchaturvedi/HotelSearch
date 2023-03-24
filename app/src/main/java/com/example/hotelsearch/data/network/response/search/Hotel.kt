@@ -1,7 +1,6 @@
 package com.example.hotelsearch.data.network.response.search
 
 
-import com.example.hotelsearch.data.network.response.Coordinates
 import com.google.gson.annotations.SerializedName
 
 data class Hotel(

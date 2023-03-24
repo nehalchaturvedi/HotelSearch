@@ -3,7 +3,7 @@ package com.example.hotelsearch.data.network.response.search
 
 import com.google.gson.annotations.SerializedName
 
-data class HotelListResponse(
+data class HotelSearchResponse(
     val q: String,
     val rc: String,
     val rid: String,

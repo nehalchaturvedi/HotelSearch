@@ -35,6 +35,8 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
             if (it == null) return@Observer
             Log.d("response", it.toString())
             binding.tvText.text = it.toString()
+
+            //make second call
         })
 
     }

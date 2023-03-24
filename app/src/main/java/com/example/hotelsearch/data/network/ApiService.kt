@@ -1,14 +1,18 @@
 package com.example.hotelsearch.data.network
 
+import android.location.LocationRequest
 import com.example.hotelsearch.data.network.interceptors.ConnectivityInterceptor
-import com.example.hotelsearch.data.network.response.search.HotelListResponse
+import com.example.hotelsearch.data.network.response.detail.HotelDetailsResponse
+import com.example.hotelsearch.data.network.response.search.HotelSearchResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 const val API_KEY = "9eda302602msh58bd8e7d28516aap15a3b6jsnbc8940bfbfc1"
@@ -20,11 +24,13 @@ const val BASE_URL = "https://hotels4.p.rapidapi.com/"
 interface ApiService {
 
     @GET("locations/v3/search")
-    fun getHotels(
+    fun getLocationParam(
         @Query("q") location: String,
         @Query("locale") locale: String = "en_US"
-    ): Deferred<HotelListResponse>
+    ): Deferred<HotelSearchResponse>
 
+    @POST("properties/v2/list")
+    fun getHotels(@Body request: LocationRequest): Deferred<HotelDetailsResponse>
 
 
     companion object {

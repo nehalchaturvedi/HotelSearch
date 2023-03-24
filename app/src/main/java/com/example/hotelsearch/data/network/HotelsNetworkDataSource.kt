@@ -1,11 +1,11 @@
 package com.example.hotelsearch.data.network
 
 import androidx.lifecycle.LiveData
-import com.example.hotelsearch.data.network.response.search.HotelListResponse
+import com.example.hotelsearch.data.network.response.search.HotelSearchResponse
 
 interface HotelsNetworkDataSource {
 
-    val downloadedHotelsList: LiveData<HotelListResponse>
+    val downloadedHotelsList: LiveData<HotelSearchResponse>
 
     suspend fun fetchHotels(
         location: String
