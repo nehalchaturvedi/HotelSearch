@@ -80,12 +80,17 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
 
     private fun fetchHotelLocation(searchText: String) = launch {
         binding.progressBar.visibility = View.VISIBLE
-        val hotels = viewModel.getList(searchText)
-        hotels.await().observe(this@HotelSearchActivity, Observer {
-            if (it == null) return@Observer
-            //locationID updated here, which triggers fetchHotelDetails()
-            locationId.postValue(getLocationId(it))
-        })
+        try {
+            val hotels = viewModel.getList(searchText)
+            hotels.await().observe(this@HotelSearchActivity, Observer {
+                if (it == null) return@Observer
+                //locationID updated here, which triggers fetchHotelDetails()
+                locationId.postValue(getLocationId(it))
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     private fun fetchHotelDetails() = launch {
@@ -98,15 +103,21 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
             return@launch
         }
 
-        val hotelDetails = viewModel.getHotelDetails(locationId.value!!)
-        //List of hotels extracted, and handed to custom adapter to display.
-        hotelDetails.await().observe(this@HotelSearchActivity, Observer {
+        try {
+            val hotelDetails = viewModel.getHotelDetails(locationId.value!!)
+            //List of hotels extracted, and handed to custom adapter to display.
+            hotelDetails.await().observe(this@HotelSearchActivity, Observer {
+                binding.progressBar.visibility = View.GONE
+                if (it == null) return@Observer
+                val response = it
+                adapter.hotels = response.data.propertySearch.properties
+                adapter.notifyDataSetChanged()
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
             binding.progressBar.visibility = View.GONE
-            if (it == null) return@Observer
-            val response = it
-            adapter.hotels = response.data.propertySearch.properties
-            adapter.notifyDataSetChanged()
-        })
+        }
+
     }
 
     //Extract location ID from response of list
