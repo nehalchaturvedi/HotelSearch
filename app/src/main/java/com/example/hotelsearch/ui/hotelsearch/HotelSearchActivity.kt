@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hotelsearch.data.network.response.search.HotelSearchResponse
 import com.example.hotelsearch.databinding.ActivityMainBinding
 import com.example.hotelsearch.ui.base.ScopedActivity
@@ -22,6 +23,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     private lateinit var viewModel: HotelSearchViewModel
     lateinit var binding: ActivityMainBinding
     var locationId = MutableLiveData<String>()
+    var adapter = HotelsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,9 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     }
 
     private fun attachListeners() {
+        binding.mRecyclerView.adapter = adapter
+        binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
+
         binding.ivSearch.setOnClickListener {
             val searchText = binding.etSearch.text.toString()
             if (searchText.isEmpty()) {
@@ -46,9 +51,9 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     }
 
     private fun fetchHotelLocation(searchText: String) = launch {
+        binding.progressBar.visibility = View.VISIBLE
         val hotels = viewModel.getList(searchText)
         hotels.await().observe(this@HotelSearchActivity, Observer {
-            binding.progressBar.visibility = View.GONE
             if (it == null) return@Observer
             binding.tvText.text = it.toString()
             locationId.postValue(getLocationId(it))
@@ -58,8 +63,12 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
     private fun fetchHotelDetails() = launch {
         val hotelDetails = viewModel.getHotelDetails(locationId.value!!)
         hotelDetails.await().observe(this@HotelSearchActivity, Observer {
+            binding.progressBar.visibility = View.GONE
             if (it == null) return@Observer
-            Log.d("response", it.toString())
+            //Log.d("response", it.toString())
+            val response = it
+            adapter.hotels = response.data.propertySearch.properties
+            Log.d("response", response.toString())
         })
     }
 
