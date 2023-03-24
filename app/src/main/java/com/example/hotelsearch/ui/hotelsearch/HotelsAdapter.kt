@@ -16,6 +16,7 @@ class HotelsAdapter : RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var ivImage: ImageView
+        var ivOffer: ImageView
         var tvTitle: TextView
         var tvContent: TextView
         var tvContent2: TextView
@@ -25,6 +26,7 @@ class HotelsAdapter : RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
             tvTitle = view.findViewById(R.id.tvTitle)
             tvContent = view.findViewById(R.id.tvContent)
             tvContent2 = view.findViewById(R.id.tvContent2)
+            ivOffer = view.findViewById(R.id.ivOffer)
         }
     }
 
@@ -40,7 +42,12 @@ class HotelsAdapter : RecyclerView.Adapter<HotelsAdapter.ViewHolder>() {
         val hotel = hotels[position]
         holder.tvTitle.text = hotel.name
         holder.tvContent.text = hotel?.offerBadge?.primary?.text ?: ""
-        holder.tvContent.text = hotel?.offerBadge?.secondary?.text ?: ""
+        holder.tvContent2.text = String.format("%d/10", hotel.reviews.total)
+        if (holder.tvContent.text.isEmpty())
+            holder.ivOffer.visibility = View.GONE
+        else
+            holder.ivOffer.visibility = View.VISIBLE
+
         Picasso.get().load(hotel.propertyImage.image.url).into(holder.ivImage)
     }
 }

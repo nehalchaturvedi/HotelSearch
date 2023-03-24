@@ -55,7 +55,6 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
         val hotels = viewModel.getList(searchText)
         hotels.await().observe(this@HotelSearchActivity, Observer {
             if (it == null) return@Observer
-            binding.tvText.text = it.toString()
             locationId.postValue(getLocationId(it))
         })
     }
@@ -67,6 +66,7 @@ class HotelSearchActivity : ScopedActivity(), KodeinAware {
             if (it == null) return@Observer
             //Log.d("response", it.toString())
             val response = it
+            adapter.hotels
             adapter.hotels = response.data.propertySearch.properties
             Log.d("response", response.toString())
         })
