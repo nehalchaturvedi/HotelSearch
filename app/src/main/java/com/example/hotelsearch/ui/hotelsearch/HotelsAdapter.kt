@@ -43,7 +43,7 @@ class HotelsAdapter(private val onClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel = hotels[position]
         holder.tvTitle.text = hotel.name ?: ""
-        holder.tvContent2.text = hotel?.offerBadge?.primary?.text ?: ""
+        holder.tvContent2.text = hotel.priceMetadata?.rateDiscount?.description?: ""
         holder.tvContent.text = "${hotel.reviews.score} / 10"
         if (holder.tvContent2.text.isEmpty())
             holder.ivOffer.visibility = View.GONE
